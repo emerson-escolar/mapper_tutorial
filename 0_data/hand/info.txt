@@ -1,0 +1,21 @@
+The data:
+  hand_simplified3k5.stl
+  hand_simplified2k.stl
+are derivatives of
+  arm.stl
+by Artec Group inc. (www.artec3d.com),
+used under CC BY 3.0 (Creative Commons Attribution 3.0 Unported License)
+
+This data is licensed under CC BY 3.0 by Emerson Escolar.
+
+
+**** More info ****
+Original "Arm" mesh data "arm.stl" downloaded from:
+  https://www.artec3d.com/3d-models/medical
+under Creative Commons Attribution 3.0 Unported License.
+
+Original mesh data was simplified using Meshlab (http://www.meshlab.net/)
+using the function Simplification: Quadric Edge Collapse Simplification to
+create meshes:
+  hand_simplified3k5.stl
+  hand_simplified2k.stl
