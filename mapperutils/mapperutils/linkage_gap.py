@@ -145,3 +145,12 @@ class LinkageGap(sklearn.base.BaseEstimator, sklearn.base.ClusterMixin):
             else:
                 print("silhouette score: {}".format(-negative_silhouette(X, self.labels_, metric=self.metric)))
         return self
+
+
+
+def cluster_number_to_threshold(k, merge_distances):
+    # check merge distances is non decreasing:
+    assert np.all(np.diff(merge_distances) >= 0)
+
+    # threshold is kth entry counting from the last.
+    return (merge_distances[-k] if k <= len(merge_distances) else -np.inf)
