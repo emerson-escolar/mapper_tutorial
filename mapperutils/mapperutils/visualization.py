@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cmx
 from mpl_toolkits.mplot3d import Axes3D
 
+import numpy as np
+
 """
 Helpful(?) scripts to do plotting
 """
