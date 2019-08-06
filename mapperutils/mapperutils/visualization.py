@@ -36,6 +36,17 @@ def scatter3d(X, lens, colorsMap='jet_r', show=True, colorbar=True, fig=None):
     return color_function
 
 
+def axisEqual3D(ax):
+    # https://stackoverflow.com/a/19248731
+    extents = np.array([getattr(ax, 'get_{}lim'.format(dim))() for dim in 'xyz'])
+    sz = extents[:,1] - extents[:,0]
+    centers = np.mean(extents, axis=1)
+    maxsize = max(abs(sz))
+    r = maxsize/2
+    for ctr, dim in zip(centers, 'xyz'):
+        getattr(ax, 'set_{}lim'.format(dim))(ctr - r, ctr + r)
+
+
 def qs_scatter(x,y, *args, **kwargs):
     fig = plt.figure()
     ax = fig.add_subplot(111)
