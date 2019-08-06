@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 Helpful(?) scripts to do plotting
 """
 
-def scatter3d(X, lens, colorsMap='jet_r', show=True):
+def scatter3d(X, lens, colorsMap='jet_r', show=True, colorbar=True, fig=None):
     # Derived from https://stackoverflow.com/a/27179208
     assert X.shape[1] == 3
     assert lens.shape[1] == 1
@@ -20,12 +20,16 @@ def scatter3d(X, lens, colorsMap='jet_r', show=True):
     scalarMap = cmx.ScalarMappable(norm=cNorm, cmap=cm)
     color_function = scalarMap.to_rgba(cs)
 
-    fig = plt.figure()
+    if fig is None:
+        fig = plt.figure()
     ax = Axes3D(fig)
     ax.scatter(X[:,0], X[:,1], X[:,2], c=color_function)
 
     scalarMap.set_array(cs)
-    fig.colorbar(scalarMap)
+
+    if colorbar:
+        fig.colorbar(scalarMap)
+
     if show:
         plt.show()
 
