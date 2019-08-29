@@ -41,8 +41,11 @@ def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
                      title=name + "diabetes_RM")
 
 
-for nc in range(3,10):
+for nc in range(3,8):
     for po in range(5,6):
         for eps in range(5,205,20):
             dens = filt.gauss_kernel_density(data.values, epsilon=eps)
             do_analysis(data, dens, "dens"+str(eps), nc, po*0.1)
+        for eps in range(1,11):
+            dens = filt.gauss_kernel_density(data.values, epsilon=0.1*eps)
+            do_analysis(data, dens, "dens"+"{0:.2f}".format(0.1*eps), nc, po*0.1)
