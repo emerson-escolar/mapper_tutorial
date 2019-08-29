@@ -36,7 +36,8 @@ def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
 
     name = "{}_n{}_o{}".format(name_prefix,nc, po)
     mapper.visualize(graph,
-                     color_function=target.values,
+                     # color_function=target.values,
+                     color_function=lens,
                      path_html=name + "_diabetes_RM.html",
                      title=name + "diabetes_RM")
 
