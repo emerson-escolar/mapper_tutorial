@@ -7,8 +7,7 @@ import pandas
 import kmapper as km
 import mapperutils.linkage_gap as lk
 import mapperutils.visualization as viz
-
-import mappertools.filters as filt
+import mapperutils.filters as filt
 
 raw = pandas.read_csv("../0_data/diabetes_RM/data.txt",
                       delim_whitespace=True, index_col = 0,
@@ -28,20 +27,6 @@ print("********** Max **********")
 print(data.max())
 
 
-normalized_data = (data - data.mean())/data.std()
-print()
-print("########## NORMALIZED DATA ##########")
-print("********** Standard deviation **********")
-print(normalized_data.std())
-
-print("********** Min **********")
-print(normalized_data.min())
-
-print("********** Max **********")
-print(normalized_data.max())
-
-quit()
-
 mapper = km.KeplerMapper(verbose=0)
 def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
     graph = mapper.map(lens,
@@ -56,9 +41,8 @@ def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
                      title=name + "diabetes_RM")
 
 
-
 for nc in range(3,10):
     for po in range(5,6):
-        for eps in range(1,4):
-            dens = filt.gauss_kernel_density(normalized_data.values, epsilon=0.1*eps)
-            do_analysis(normalized_data, dens, "dens"+str(eps), nc, po*0.1)
+        for eps in range(5,205,20):
+            dens = filt.gauss_kernel_density(data.values, epsilon=eps)
+            do_analysis(data, dens, "dens"+str(eps), nc, po*0.1)
