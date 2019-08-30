@@ -49,4 +49,4 @@ for nc in range(3,8):
             do_analysis(data, dens, "dens"+str(eps), nc, po*0.1)
         for eps in range(1,11):
             dens = filt.gauss_kernel_density(data.values, epsilon=0.1*eps)
-            do_analysis(data, dens, "dens"+"{0:.2f}".format(0.1*eps), nc, po*0.1)
+            do_analysis(data, dens, "dens"+"{:.2f}".format(0.1*eps), nc, po*0.1)
