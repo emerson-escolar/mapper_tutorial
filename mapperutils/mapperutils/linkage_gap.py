@@ -126,7 +126,12 @@ class LinkageGap(sklearn.base.BaseEstimator, sklearn.base.ClusterMixin):
             self.labels_ = np.array([1])
             return
 
-        Z = scipy.cluster.hierarchy.linkage(X, method=self.method, metric=self.metric)
+        if self.metric != 'precomputed':
+            Z = scipy.cluster.hierarchy.linkage(X, method=self.method, metric=self.metric)
+        else:
+            compdists = scipy.spatial.distance.squareform(X, force='tovector')
+            Z = scipy.cluster.hierarchy.linkage(compdists, method=self.method, metric=self.metric)
+
 
         # MAPPER PAPER GAP HEURISTIC
         gap_heuristic_percentiles = {'firstgap': 0, 'midgap': 50, 'lastgap':100}
