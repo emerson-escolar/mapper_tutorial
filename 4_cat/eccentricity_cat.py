@@ -22,21 +22,41 @@ def do_analysis(data, lens, name_prefix, nc, po):
                      path_html = name + "_cat.html",
                      title= name + "_cat")
 
-n = 10
+n = 12
 p = 0.5
 
 # ********** reference cat **********
 cat = trimesh.load_mesh("../0_data/cat/cat-reference-simplified.obj")
 data = cat.vertices
-lens = data[:,1:2]
+lens = filt.eccentricity(data,p=1)
 
 viz.scatter3d(data, lens,colorsMap='viridis')
-do_analysis(data, lens, "cat_y_", n, p)
+do_analysis(data, lens, "cat_ecc_", n, p)
 
 # ********** seated cat **********
 cat = trimesh.load_mesh("../0_data/cat/cat-02-simplified.obj")
 data = cat.vertices
 
-lens = data[:,1:2]
+lens = filt.eccentricity(data,p=1)
 viz.scatter3d(data, lens,colorsMap='viridis')
-do_analysis(data, lens, "seated_cat_y_", n, p)
+do_analysis(data, lens, "seated_cat_ecc_", n, p)
+
+
+# for n in range(12,20,2):
+#     for pprime in range(3,8):
+#         p = 0.1 * pprime
+#         # ********** reference cat **********
+#         cat = trimesh.load_mesh("../0_data/cat/cat-reference-simplified.obj")
+#         data = cat.vertices
+#         lens = filt.eccentricity(data,p=1)
+
+#         # viz.scatter3d(data, lens,colorsMap='viridis')
+#         do_analysis(data, lens, "cat_ecc_", n, p)
+
+#         # ********** seated cat **********
+#         cat = trimesh.load_mesh("../0_data/cat/cat-02-simplified.obj")
+#         data = cat.vertices
+
+#         lens = filt.eccentricity(data,p=1)
+#         # viz.scatter3d(data, lens,colorsMap='viridis')
+#         do_analysis(data, lens, "seated_cat_ecc_", n, p)
