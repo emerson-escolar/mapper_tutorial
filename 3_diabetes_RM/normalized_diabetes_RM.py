@@ -56,8 +56,9 @@ def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
 
 
 
-for nc in range(3,10):
-    for po in range(5,6):
-        for eps in range(2,10):
-            dens = filt.gauss_kernel_density(normalized_data.values, epsilon=eps)
-            do_analysis(normalized_data, dens, "dens"+"{:.1f}".format(eps), nc, po*0.1)
+nc = 5
+po = 5
+eps = 0.5
+
+dens = filt.gauss_kernel_density(normalized_data.values, epsilon=eps)
+do_analysis(normalized_data, dens, "dens"+"{:.1f}".format(eps), nc, po*0.1)
