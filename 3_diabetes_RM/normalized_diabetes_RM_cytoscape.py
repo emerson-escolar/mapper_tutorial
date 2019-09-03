@@ -39,12 +39,7 @@ def do_analysis(data, lens, name_prefix, nc, po,metric='euclidean'):
     nx_graph_simple = expo.kmapper_to_nxmapper(graph)
     expo.cytoscapejson_dump(nx_graph_simple, name + "_nm_diabetes_RM_simple.cyjs")
 
-
-    extra_data = {x: list(raw.loc[:,x]) for x in raw.columns}
-    extra_normalized_data = {"normalized_" + x: list(normalized_data.loc[:,x])
-                             for x in normalized_data.columns}
-    extra_data.update(extra_normalized_data)
-
+    extra_data = {x: list(data.loc[:,x]) for x in data.columns}
     extra_transforms = {x : np.mean for x in extra_data
                         if x != "Clinical_classification"}
 
