@@ -21,7 +21,7 @@ def do_analysis(data, dists, lens, name_prefix, nc, po):
     mapper.visualize(graph,
                      color_function=lens,
                      path_html = name + "_cat.html",
-                     title= name + "_cat")
+                     title= name + "_cat");
 
 n = 12
 p = 0.5
