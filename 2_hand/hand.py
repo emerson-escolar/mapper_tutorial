@@ -30,4 +30,4 @@ graph = mapper.map(lens, data,
 
 name = "n{}_p{}".format(n,p)
 mapper.visualize(graph, color_function=lens,
-                 path_html="hand_only_" + name + ".html",title="hand, " +name)
+                 path_html="hand_only_" + name + ".html",title="hand, " +name);
