@@ -37,9 +37,12 @@ def test_heuristics():
     fg = lk.LinkageGap(heuristic='firstgap').fit(X)
     assert len(np.unique(fg.labels_)) == 3
 
+    with pytest.raises(Exception):
+        fg = lk.LinkageGap(heuristic='foobar')
+
 
 def test_heuristics_precomputed():
-    dists = spd.pdist(X)
+    dists = spd.squareform(spd.pdist(X))
 
     fg = lk.LinkageGap(heuristic='firstgap', metric='precomputed').fit(dists)
     assert len(np.unique(fg.labels_)) == 3

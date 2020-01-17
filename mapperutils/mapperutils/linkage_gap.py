@@ -39,10 +39,29 @@ def mapper_gap_heuristic(Z, percentile, k_max=None):
 
 
 def negative_silhouette(X, labels, metric):
-    if metric == 'precomputed':
-        return -sklearn.metrics.silhouette_score(scipy.spatial.distance.squareform(X), labels, metric=metric)
-    else:
-        return -sklearn.metrics.silhouette_score(X, labels, metric=metric)
+    """
+    Compute the negative of the silhouette score.
+    Uses sklearn.metrics.negative_silhouette
+
+    Parameters
+    ----------
+    X : array [n_samples, n_samples] if metric == "precomputed", or
+        array [n_samples, n_features] otherwise
+
+        Array of pairwise distances between samples, or a feature array.
+
+    labels : array, shape = [n_samples]
+         Predicted labels for each sample.
+
+    metric : string, or callable
+        The metric to use when calculating distance between instances in a
+        feature array. If metric is a string, it must be one of the options
+        allowed by :func:`metrics.pairwise.pairwise_distances
+        <sklearn.metrics.pairwise.pairwise_distances>`. If X is the distance
+        array itself, use ``metric="precomputed"``.
+    """
+
+    return -sklearn.metrics.silhouette_score(X, labels, metric=metric)
 
 
 class LinkageGap(sklearn.base.BaseEstimator, sklearn.base.ClusterMixin):
@@ -100,20 +119,19 @@ class LinkageGap(sklearn.base.BaseEstimator, sklearn.base.ClusterMixin):
             k_max = np.inf
         self.k_max = k_max
 
+        if self.heuristic not in ['firstgap', 'midgap', 'lastgap']:
+            raise RuntimeError("Invalid heuristic {}!".format(self.heuristic))
+
 
     def fit(self, X, y=None):
         """Fit the Linkage clustering on data
 
         Parameters
         ----------
-        X : ndarray
-            A collection of `m` observation vectors in `n` dimensions
-            as an `m` by `n` array.
+        X : array [n_samples, n_samples] if metric == "precomputed", or
+            array [n_samples, n_features] otherwise
 
-            Alternatively, a condensed distance matrix. A condensed distance matrix
-            is a flat array containing the upper triangular of the distance matrix.
-            This is the form that ``pdist`` returns. All elements of the condensed
-            distance matrix must be finite, i.e. no NaNs or infs.
+            Array of pairwise distances between samples, or a feature array.
 
         y : ignored
 
@@ -132,15 +150,10 @@ class LinkageGap(sklearn.base.BaseEstimator, sklearn.base.ClusterMixin):
             compdists = scipy.spatial.distance.squareform(X, force='tovector')
             Z = scipy.cluster.hierarchy.linkage(compdists, method=self.method, metric=self.metric)
 
-
         # MAPPER PAPER GAP HEURISTIC
         gap_heuristic_percentiles = {'firstgap': 0, 'midgap': 50, 'lastgap':100}
-        if self.heuristic in gap_heuristic_percentiles:
-            percentile = gap_heuristic_percentiles[self.heuristic]
-            self.labels_, k = mapper_gap_heuristic(Z, percentile, self.k_max)
-        else:
-            # do something
-            pass
+        percentile = gap_heuristic_percentiles[self.heuristic]
+        self.labels_, k = mapper_gap_heuristic(Z, percentile, self.k_max)
 
         # FINAL REPORTING
         if self.verbose:
