@@ -32,3 +32,9 @@ or
 pip install numpy
 ```
 (as necessary).
+
+As one way to inspect the Mapper graphs, this tutorial introduces the use of the software [Cytoscape](https://cytoscape.org/). Installing this is recommended.
+
+
+
+
