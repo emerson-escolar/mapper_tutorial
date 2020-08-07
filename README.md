@@ -25,11 +25,11 @@ For example, using pip, the command is `pip3 install numpy` (or just `pip instal
 
 Next, install mapperutils by running the following inside the mapperutils folder:
 ```
-pip3 install numpy
+python3 setup.py install
 ```
 or
 ```
-pip install numpy
+python setup.py install
 ```
 (as necessary).
 
