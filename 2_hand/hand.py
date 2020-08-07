@@ -3,7 +3,6 @@ import numpy as np
 import sklearn
 
 import kmapper as km
-import kmapper.jupyter as kmj
 
 import mapperutils.linkage_gap as lk
 import mapperutils.visualization as viz
