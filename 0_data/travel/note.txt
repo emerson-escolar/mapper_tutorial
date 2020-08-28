@@ -1,0 +1,5 @@
+Source: Renjith, Shini, A. Sreekumar, and M. Jathavedan. "Evaluation of partitioning clustering algorithms for processing social media data in tourism domain." 2018 IEEE Recent Advances in Intelligent Computational Systems (RAICS). IEEE, 2018.
+
+Data downloaded from:
+https://archive.ics.uci.edu/ml/datasets/Travel+Reviews#
+
