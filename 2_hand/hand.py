@@ -1,6 +1,5 @@
 import trimesh
 import numpy as np
-import sklearn
 
 import kmapper as km
 
@@ -28,5 +27,5 @@ graph = mapper.map(lens, data,
                    cover=km.Cover(n_cubes = n, perc_overlap = p))
 
 name = "n{}_p{}".format(n,p)
-mapper.visualize(graph, color_function=lens,
-                 path_html="hand_only_" + name + ".html",title="hand, " +name);
+mapper.visualize(graph, color_values=lens,
+                 path_html="hand_only_" + name + ".html",title="hand, " +name)

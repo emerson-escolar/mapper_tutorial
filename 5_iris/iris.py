@@ -29,7 +29,7 @@ def do_analysis(lens, name_prefix, nc, po):
 
     name = "{}_n{}_o{}".format(name_prefix,nc, po)
     mapper.visualize(graph,
-                     color_function=target,
+                     color_values=target,
                      path_html=name + "_iris.html",
                      title=name + "_iris")
 

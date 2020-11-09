@@ -20,7 +20,7 @@ def do_analysis(data, lens, cf, name_prefix, nc, po):
                        clusterer = lk.LinkageGap(verbose=0, metric='euclidean'),
                        cover=km.Cover(n_cubes=nc, perc_overlap=po))
     mapper.visualize(graph,
-                     color_function = cf,
+                     color_values = cf,
                      path_html = name + "_travel.html",
                      title= name+"_travel")
 

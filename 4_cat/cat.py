@@ -18,7 +18,7 @@ def do_analysis(data, lens, name_prefix, nc, po):
                        clusterer = lk.LinkageGap(verbose=0),
                        cover=km.Cover(n_cubes=nc, perc_overlap=po))
     mapper.visualize(graph,
-                     color_function=lens,
+                     color_values=lens,
                      path_html = name + "_cat.html",
                      title= name + "_cat");
 

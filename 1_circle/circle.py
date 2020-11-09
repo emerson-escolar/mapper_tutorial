@@ -1,7 +1,8 @@
+import math
+
 import numpy as np
 import sklearn
 import kmapper as km
-import math
 
 import mapperutils.visualization as viz
 
@@ -29,7 +30,7 @@ def do_analysis(lens, name_prefix):
                        data,
                        clusterer=sklearn.cluster.DBSCAN(eps=0.1, min_samples=5),
                        cover=km.Cover(n_cubes=10, perc_overlap=0.2))
-    mapper.visualize(graph, color_function=lens,
+    mapper.visualize(graph, color_values=lens,
                      path_html = name_prefix + "_circle_output.html",
                      title = name_prefix + " circle",
                      lens = lens)
