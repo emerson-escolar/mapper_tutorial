@@ -12,7 +12,7 @@ import mapperutils.filters as filt
 
 mapper = km.KeplerMapper(verbose=0)
 
-def do_analysis(data, lens, cf, name_prefix, nc, po):
+def do_analysis(data, lens, cf, cf_name, name_prefix, nc, po):
     name = "{:s}_n{:d}_o{:.2f}".format(name_prefix, nc, po)
     graph = mapper.map(lens,
                        data,
@@ -20,6 +20,7 @@ def do_analysis(data, lens, cf, name_prefix, nc, po):
                        cover=km.Cover(n_cubes=nc, perc_overlap=po))
     mapper.visualize(graph,
                      color_values = cf,
+                     color_function_name = cf_name,
                      path_html = name + "_travel.html",
                      title= name+"_travel")
 
@@ -50,4 +51,4 @@ cf = np.array(data.loc[:,"art_galleries"])
 
 p = 5
 n = 5
-do_analysis(data.values, lens, cf, "euc_pca2d" + "_art", n, 0.1*p)
+do_analysis(data.values, lens, cf, "art_galleries", "euc_pca2d" + "_art", n, 0.1*p)

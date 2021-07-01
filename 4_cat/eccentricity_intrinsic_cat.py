@@ -20,6 +20,7 @@ def do_analysis(data, dists, lens, name_prefix, nc, po):
                        cover=km.Cover(n_cubes=nc, perc_overlap=po))
     mapper.visualize(graph,
                      color_values=lens,
+                     color_function_name=name_prefix,
                      path_html = name + "_cat.html",
                      title= name + "_cat");
 
@@ -34,7 +35,7 @@ dist_mat = np.load("cat_dists.npy")
 lens = filt.eccentricity_from_dist(dist_mat,p=1)
 
 viz.scatter3d(data, lens, colorsMap='viridis')
-do_analysis(data, dist_mat, lens, "cat_ecc_ins_", n, p)
+do_analysis(data, dist_mat, lens, "cat_ecc_ins", n, p)
 
 # ********** seated cat **********
 cat = trimesh.load_mesh("../0_data/cat/cat-02-simplified.obj")
@@ -44,4 +45,4 @@ seated_dist_mat = np.load("seated_cat_dists.npy")
 lens = filt.eccentricity_from_dist(seated_dist_mat,p=1)
 
 viz.scatter3d(data, lens, colorsMap='viridis')
-do_analysis(data, seated_dist_mat, lens, "seated_cat_ecc_ins_", n, p)
+do_analysis(data, seated_dist_mat, lens, "seated_cat_ecc_ins", n, p)
